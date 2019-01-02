@@ -1,0 +1,625 @@
+body {
+    font-size: 2.5vh;
+}
+
+a {
+    color: black !important;
+}
+
+#mOldBody {
+    background-color: #eee;
+    display: none;
+}
+
+#mobileBody {
+        text-align: center;
+}
+
+body > table {
+    display: none;
+}
+
+#mSelCampain {
+    font-size: 3vh;
+    margin-left: 1%;
+    margin-top: 1%;
+    height: 4.5vh !important;
+    padding: 3pt;
+}
+
+#mLinenumber {
+    font-size: 3vh;
+    margin-left: 1%;
+    margin-top: 1%;
+    height: 5vh;
+    width: 40%;
+}
+
+#mQuantity {
+    font-size: 3vh;
+    width: 10%;
+    margin-left: 2%;
+    margin-top: 1%;
+    height: 5vh;
+}
+
+.hide {
+    display: none;
+}
+
+button {
+    font-size: 3vh;
+    padding: 1% 3% 1% 3%;
+    z-index: 200;
+    height: 5vh;
+}
+
+#mTopText {
+    margin: 2%;
+    font-size: 2.7vh;
+    text-align: center;
+}
+
+#mBusket > table > tbody > tr > td > table {
+    display: none;
+}
+
+#mBusket > table > tbody > tr {
+    height: 3.5vh;
+}
+
+#mBusket > table > tbody > tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+#mBusket > table > tbody > tr:nth-child(even) > td:nth-child(1) {
+    width: 5%;
+    font-size: 2.5vh;
+    display: none;
+}
+
+#mBusket > table > tbody > tr:nth-child(odd) > td:nth-child(1) {
+    height: 4.5vh;
+    vertical-align: bottom;
+    border-top: solid #ccc 1pt;
+    font-size: 2.6vh;
+}
+
+#mBusket > table > tbody > tr > td:nth-child(2) {
+    width: 25%;
+    font-size: 2.5vh;
+}
+
+#mBusket > table > tbody > tr > td:nth-child(3) {
+    width: 15%;
+    vertical-align: middle;
+    font-size: 2.5vh;
+}
+
+#mBusket > table > tbody > tr > td:nth-child(4) {
+    width: 0;
+    font-size: 2.5vh;
+}
+
+#mBusket > table > tbody > tr > td:nth-child(5) {
+    width: 23%;
+    font-size: 2.5vh;
+}
+
+#mBusket > table > tbody > tr > td:nth-child(6) {
+    width: 23%;
+    font-size: 2.5vh;
+}
+
+#mBusket > table > tbody > tr > td:nth-child(7) {
+    width: 14%;
+    font-size: 2.5vh;
+    text-align: left;
+    background-image: url(http://www.avon.com.ua/REPSuite/static/images/trash-can.svg);
+    background-repeat:no-repeat;
+    background-position:right;
+}
+
+.linearFormInputQty {
+    font-size: 2.5vh !important;
+    width: 90% !important;
+    height: 2.5vh !important;
+}
+
+#showDelCheckBox > input {
+    width: 2.2vh;
+    height: 2.2vh;
+}
+
+#mBottomHeader {
+    margin-top: 1vh;
+    font-size: 3.5vh;
+}
+
+#lpLogin {}
+
+#lpLoginDiv {
+    clear: both;
+}
+
+#mLoginUserID {
+    margin: 2vh;
+    font-size: 3vh;
+    width: 93%;
+    height: 5vh !important;
+    padding-left: 1vh;
+}
+
+#mLoginPassword {
+    margin: 0 2vh 0 2vh;
+    font-size: 3vh;
+    width: 93%;
+    height: 5vh !important;
+    padding-left: 1vh;
+}
+
+#mSubmitBtn {
+    margin: 3vh 0 0 19%;
+    width: 65%;
+    font-size: 3vh;
+    height: 5vh;
+}
+
+#lpBecomeRepSl {
+    margin-top: 2vh;
+}
+
+#lpBecomeRepSl > a {
+    float: left;
+    clear: both;
+    width: 100%
+}
+
+#lpBecomeRepSl > a > img {
+    width: 90%;
+    margin: 1vh 5% 0 5%;
+}
+
+#lpHotOffer {
+    margin: 1vh 1% 0 1%;
+    text-align: center;
+}
+
+#lpHotOffer > img {
+    width: 100%;
+}
+
+#mPlaceAnOrder {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10%;
+    font-size: 3vh;
+    border: 1pt #ccc solid;
+    padding: 1vh;
+    padding-top: 1vh;
+    width: 80%;
+}
+#mGoToDesktop {
+    width: 75%;
+    font-size: 3vh;
+    height: 5vh;
+}
+
+.topLineLocal {
+    display: none;
+}
+
+#mCatalogOnPAO {
+    width: 85%;
+}
+
+.widget-button {
+    display: none;
+}
+
+#mCheckput > button {
+  width: 75%;
+}
+
+#mDescriptionBody {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+#mGoToDelivery {
+    font-size: 3vh;
+    padding: 1% 3% 1% 3%;
+    margin-top: 5%;
+    height: 5vh;
+    width: 75%;
+}
+
+#mDeliveryAddr {
+    font-size: 3.3vh;
+    margin: 2%;
+}
+
+#mDeliveryAddr > div {
+    display: inline-block;
+    color: #ff0092;
+    text-decoration: underline;
+}
+
+#deliveryType {
+    padding: 1% !important;
+}
+
+input {
+    height: 1.8vh;
+    width: 1.8vh;
+}
+
+.deliveryTypeTxt {
+  font-size: 2.7vh !important;
+  font-weight: 500 !important;
+  line-height: 4vh !important;
+  padding-left: 0.5% !important;
+}
+
+.com_heading_lb {
+    font-size: 3.3vh !important;
+}
+
+.com_heading_tr {
+    height:0 !important;
+}
+
+.addressOrdDelivery {
+    font-size:2.5vh;
+    display:block;
+}
+
+td {
+    font-size:2.5vh !important;
+    padding-left:1%;
+}
+
+.addressDateDelivery {
+    font-size: 2.5vh;
+}
+
+.addressFeeDelivery {
+    font-size: 2.5vh;
+}
+
+.port_btn_align_POC {
+    width:80%;
+    font-size: 2.5vh !important;
+}
+
+.addressFeeDeliveryContent {
+    font-size:2.5vh !important;
+    display:block;
+    padding: 1% 0 1% 0;
+}
+
+.padding_port_body {
+    padding: 2% 0 1% 0;
+}
+
+.more {
+    font-size: 3.3vh !important;
+}
+
+.portheadertext {
+    font-size: 3.3vh !important;
+}
+
+#payment_highlighter > tbody > tr:nth-child(2) > td {    
+    vertical-align:  top;
+}
+
+.addressDateDelivery {
+    font-size: 2.5vh !important;
+}
+
+.addressFeeDelivery {
+    font-size: 2.5vh !important;
+}
+
+#paymentType {
+    padding:0 !important;
+}
+
+.paymentTypeTxt {
+    font-size:2.5vh !important;
+    font-weight: 400 !important;
+    line-height: 2.5vh !important;
+}
+
+label {
+    font-size:2.5vh !important;
+}
+
+.port_btn_align {
+    width: 60% !important;
+    font-size:2.8vh !important;
+    padding:1%;
+}
+
+#deliv_radio_select_sec {
+    text-align:center;
+    float:none !important;
+}
+
+#ioReminder {
+    display: none;
+}
+
+#mLoaderImg {
+    background-image: url(http://temnui.com/avontest/img/loader.gif);
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1000;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#mReadMore {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    background-color: white;
+}
+
+#mReadMorePM {
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    background-color: white;
+}
+
+.LearnMoreDM_txt {
+    font-size: 2.5vh !important;
+    background-color: white;
+}
+
+.LearnMoreDM_txt a {
+    font-size: 2.5vh !important;
+}
+
+.LearnMorePM_txt {
+    font-size: 2.5vh !important;
+}
+
+.LearnMorePM_txt a {
+    font-size: 2.5vh !important;
+}
+
+#backArrow {
+    font-size: 4vh;
+    font-stretch: ultra-condensed;
+}
+
+#mSubTotalPage {
+    padding: 1% 2% 1% 2%;
+    font-size: 0.9vh;
+}
+
+h1 {
+    font-size: 2.5vh;
+}
+
+h2 {
+    font-size: 1.3vh;
+}
+
+#mOrderConfirmationPage {
+    padding: 1% 2% 1% 2%;
+}
+
+#mOrderConfirmationPage h1 {
+    font-size: 3.5vh;
+    display: block;
+    text-align: center;
+}
+
+#mOrderConfirmationPage h2 {
+    font-size: 3vh;
+}
+
+.mMiddleButton {
+    font-size: 3vh;
+    margin: 2% 0 0 0;
+    padding: 1% 3% 1% 3%;
+}
+
+.font_bold {
+    font-size: 2.5vh !important;
+
+}
+
+.mMiddle {
+    text-align: center;
+    margin-top: 2%;
+}
+
+#mButtonCatalogOnPAO {
+    width: 95%;
+    font-size: 3vh;
+    z-index: 200;
+    height:5vh;
+}
+
+#mAllGoods > table > tbody > tr > td:nth-child(1) {
+    display: none;
+}
+
+#goodsNoDiscount > tbody > tr > td:nth-child(1) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr > td:nth-child(5) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr > td:nth-child(6) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr > td:nth-child(7) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr > td:nth-child(8) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr > td:nth-child(9) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr:nth-last-child(1) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr:nth-last-child(2) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr:nth-last-child(3) {
+    display:none;
+}
+
+#mGoodsFree > table > tbody > tr > td:nth-child(1) {
+    display:none;   
+}
+
+#mAllGoods {
+    overflow: scroll;  
+}
+
+#goodsNoDiscount > tbody > tr:nth-child(12) {
+    display:none;
+}
+
+#goodsNoDiscount > tbody > tr > td:nth-child(2) {
+    display: none;
+}
+
+#mGoodsNoDiscount {
+    overflow: scroll;
+}
+
+#mAllGoods > table > tbody > tr > td:nth-child(5) {
+    display: none;
+}
+
+#mAllGoods > table > tbody > tr > td:nth-child(6) {
+    display: none;
+}
+
+#mAllGoods > table > tbody > tr > td:nth-child(8) {
+    display: none;
+}
+
+#mDeleteChecked {
+    clear:both;
+    display:block;
+    margin: 0 auto;
+    margin-top: 2vh;
+    width: 75%;
+    height: 5vh;
+    font-size: 3vh;
+}
+
+#mSubTotal {
+    margin-top: 2%;
+}
+
+#mSubTotal > p {
+    margin-top:2%;
+    font-size: 1em;
+}
+
+#mSubTotal > input[type="checkbox"] {
+    height: 5vw;
+    width: 5vw;
+    display:block;
+    float:left;
+    margin-top:1%;
+}
+
+#textCheckBox {
+    font-size: 2.5vh;
+    margin-left: 8%;
+    display:block;
+}
+
+#subButton {
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 90%;
+    font-size: 2.5vh !important;
+    height: 4.5vh !important;
+}
+
+#mobileBody > button {
+    margin-left: 3%;
+}
+
+#addSelectedDelivery_POC {
+    width: 75%;
+    margin-left: 12.5%;
+    height: 5vh;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 3.5vh !important;
+}
+
+#mDeliveryContent > div.mMiddle > button {
+    width: 72%;
+}
+
+#mAllGoods > table > tbody > tr:nth-last-child(1) {
+    display:none;    
+}
+
+#mAllGoods > table > tbody > tr:nth-last-child(2) {
+    display:none;    
+}
+
+#mSumms {
+    font-size: 190%;
+}
+
+#mGoodsFree {
+    overflow: scroll;
+}
+
+#mCloseButton {
+    background-color: #E7E7E7;
+    padding: 2%;
+    float: right;
+    font-size: 0.9rem;
+    margin: 0.4rem;
+    height: 2rem;
+    width: 2rem;
+}
+
+#mHelpOverlay {
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    box-shadow: 0px -5px 5px #ccc;
+    border: solid 1px #c0c0c0;
+}
+
+#mHelpContent {
+    padding: 0.5rem;
+}
