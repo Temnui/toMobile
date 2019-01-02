@@ -1,18 +1,19 @@
-var mQuantityOfProducts = 0; // don`t forget add feature save current state of basket
-var mCampainNumber = '';
-var mDescription = '';
-var mDescriptionBody = '<br><div id="mDescriptionBody"></div>';
-var mTopText = '';
-var mBody = document.getElementsByTagName('body');
+let mQuantityOfProducts = 0; // don`t forget add feature save current state of basket
+let mCampainNumber = '';
+let mDescription = '';
+let mDescriptionBody = '<br><div id="mDescriptionBody"></div>';
+let mTopText = '';
+let mBody = document.getElementsByTagName('body');
 // uncomment next lie on prod, now old body is visible
 // document.getElementById('mOldBody').style.display = "none";
 /* Begin test for mobile */
+// noinspection JSUnresolvedFunction
 $(document).ready(function() {
     /*if (localStorage.getItem('mobileOrder') == 'true') {
         mStart();
     }*/
     // variable declaration for mobile
-    var isMobile = {
+    let isMobile = {
         Android: function() {
             return navigator.userAgent.match(/Android/i);
         },
@@ -34,29 +35,30 @@ $(document).ready(function() {
     };
     // mobile mCheck
     // uncomment next lie on prod now we check only for repAcctNumber
-    var repAcctNumber = AvonAnalyticsObjex.Profile.repAcct;
-    var checkAcctNumber = false;
-    if (repAcctNumber == '22444856' || repAcctNumber == '29838218' || repAcctNumber == '17841221' || repAcctNumber == '8610786' || repAcctNumber == '26227353') {
+    // noinspection JSUnresolvedVariable
+    let repAcctNumber = AvonAnalyticsObjex.Profile.repAcct;
+    let checkAcctNumber = false;
+    if (repAcctNumber === '22444856' || repAcctNumber === '29838218' || repAcctNumber === '17841221' || repAcctNumber === '8610786' || repAcctNumber === '26227353') {
         checkAcctNumber = true;
     }
     if (isMobile.any() && (/loginMain/.test(window.location.pathname)) && (/qaf/.test(window.location.hostname))) {
         // if user use mobile device on loginMain.page, we show him mobile version with bottom button "go to desktop view"
-        if (localStorage.getItem('mobileOrder') == null) { // if mobileOrder == null - then we know that is the first wisist and we switch to mobile view
+        if (localStorage.getItem('mobileOrder') == null) { // if mobileOrder == null - then we know that is the first visit and we switch to mobile view
             localStorage.setItem('mobileOrder', 'true');
             mStart();
-        } else if (localStorage.getItem('mobileOrder') == 'false') {
-            // if false, then we know that on pervious time, choose desktop view, so we ask him did he want go to mobile
+        } else if (localStorage.getItem('mobileOrder') === 'false') {
+            // if false, then we know that on previous time, choose desktop view, so we ask him did he want go to mobile
             if (confirm("Перейти в режим сдачи заказа для мобильного?")) {
                 localStorage.setItem('mobileOrder', 'true');
                 mStart();
             } else {
                 localStorage.setItem('mobileOrder', 'false');
             }
-        } else if (localStorage.getItem('mobileOrder') == 'true') {
+        } else if (localStorage.getItem('mobileOrder') === 'true') {
             mStart();
         }
     } else if (isMobile.any() && (checkAcctNumber)) { //check rep account number and for mobile of course
-        if (localStorage.getItem('mobileOrder') != 'true') {
+        if (localStorage.getItem('mobileOrder') !== 'true') {
             if (confirm("Перейти в режим сдачи заказа для мобильного?")) {
                 localStorage.setItem('mobileOrder', 'true');
                 mStart();
@@ -75,9 +77,9 @@ function isNumeric(n) {
 }
 
 function mAddToOrder() {
-    var mCheck = false;
-    var mLinenumber = document.getElementById('mLinenumber').value;
-    var mQuantity = document.getElementById('mQuantity').value;
+    let mCheck = false;
+    let mLinenumber = document.getElementById('mLinenumber').value;
+    let mQuantity = document.getElementById('mQuantity').value;
     // mCheck for correct data
     if (mLinenumber.length === 5 && isNumeric(mLinenumber)) {
         mCheck = true;
@@ -94,11 +96,13 @@ function mAddToOrder() {
     // do when data is correct
     if (mCheck) {
         document.getElementById('newItems[' + mQuantityOfProducts + '].campaignnr').value = mCampainNumber;
+        // noinspection JSUnresolvedFunction
         validateProductNoAndQty(this, 'newItems[' + mQuantityOfProducts + '].campaignnr');
         document.getElementById('newItems[' + mQuantityOfProducts + '].linenumber').value = mLinenumber;
         document.getElementById('newItems[' + mQuantityOfProducts + '].quantity').value = mQuantity;
         mQuantityOfProducts += 1;
         sessionStorage.setItem('mQuantityOfProducts', mQuantityOfProducts);
+        // noinspection JSUnresolvedFunction
         populateDescriptions();
     }
 }
@@ -109,12 +113,15 @@ function replaceAll(str, searchStr, replaceStr) {
     // escape regexp special characters in search string
     searchStr = searchStr.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     return str.replace(new RegExp(searchStr, 'gi'), replaceStr);
-};
+}
 //end of prototype 
 
+// noinspection JSUnusedGlobalSymbols todo: check if we need this function
 function setForDelete(j) {
     document.getElementById('savedCustomers[0].savedCustomerItems[' + j + '].checkedForDel').click();
+    // noinspection JSUnresolvedFunction
     setDirtyValue();
+    // noinspection JSUnresolvedFunction
     checkUncheckInner();
 }
 
@@ -125,35 +132,36 @@ function mCreateBody() {
         sessionStorage.setItem('mQuantityOfProducts', mQuantityOfProducts);
     }
     mQuantityOfProducts = Number(sessionStorage.getItem('mQuantityOfProducts'));
+    // noinspection JSUnresolvedVariable
     mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo;
     mCampainNumber = mCampainNumber.split(":");
     mCampainNumber[1] = mCampainNumber[1].replace("C", "");
-    var tempCampNumber = mCampainNumber[1];
+    let tempCampNumber = mCampainNumber[1];
     mCampainNumber = mCampainNumber[0] + mCampainNumber[1];
     mTopText = '<div id="mTopText">Кампанія ' + tempCampNumber + ', оберіть код продукту, та кількість:</div><br>';
     //var mSelCampain = '<select id="mSelCampain"><option selected value="' + mCampainNumber + '">' + mCampainNumber.replace('2018', '') + '</option></select>';
-    var mInputs = '<input id="mLinenumber" tabindex="1" value="" type="number" size="6" maxlength="5" defaultvalue=""><input id="mQuantity" tabindex="2" value="1" type="text" size="3" maxlength="3" defaultvalue="1">';
-    var mButtonAdd = '<button type="button" onclick=\'mAddToOrder();\'>Додати</button>';
+    let mInputs = '<input id="mLinenumber" tabindex="1" value="" type="number" size="6" maxlength="5" defaultvalue=""><input id="mQuantity" tabindex="2" value="1" type="text" size="3" maxlength="3" defaultvalue="1">';
+    let mButtonAdd = '<button type="button" onclick=\'mAddToOrder();\'>Додати</button>';
     for (i = 0; mQuantityOfProducts >= i; i++) {
-        if (document.getElementById('newItems[' + i + '].quantity').value != 0) {
-            var tempQuantity = document.getElementById('newItems[' + i + '].quantity').value;
+        if (document.getElementById('newItems[' + i + '].quantity').value !== 0) {
+            let tempQuantity = document.getElementById('newItems[' + i + '].quantity').value;
             mDescription = 'Кількість: ' + tempQuantity + ' ' + document.getElementById('newItems[' + i + '].description.display').innerHTML + '<br>' + mDescription;
         }
     }
-    var mCheckout = '<div id="mCheckput"><button type="button" onclick=\'mCheckout();\'>Додати до замовлення</button><div id="mBusket"></div></div>';
-    var mGoToDelivery = '<input id="mGoToDelivery" type="submit" value="Оформлення замовлення" onclick="mGoToDeliveryFn()">';
-    var mDeleteChecked = '<input id="mDeleteChecked" type="submit" value="Видалити" onclick="updateOrder();">';
+    let mCheckout = '<div id="mCheckput"><button type="button" onclick=\'mCheckout();\'>Додати до замовлення</button><div id="mBusket"></div></div>';
+    let mGoToDelivery = '<input id="mGoToDelivery" type="submit" value="Оформлення замовлення" onclick="mGoToDeliveryFn()">';
+    // noinspection JSUnresolvedFunction
+    let mDeleteChecked = '<input id="mDeleteChecked" type="submit" value="Видалити" onclick="updateOrder();">';
     document.getElementById('mobileBody').innerHTML += mTopText + mInputs + mButtonAdd + mDescriptionBody + mCheckout + mDeleteChecked + mGoToDelivery;
     document.getElementById('mDescriptionBody').innerHTML = mDescription;
     // build basket
-    var mBusket = '<div id="mBottomHeader">Обрані продукти:</div><table><tbody>';
-    var mItemDescription = [];
-    var mStringDescription = [];
-    var i = 2;
-    var j = 0;
-    var tempVar = ''; // variable for replacement, what we want to replace
-    var tempVar2 = ''; // variable for replacement, on what we replace
-    var str = '';
+    let mBusket = '<div id="mBottomHeader">Обрані продукти:</div><table><tbody>';
+    let mItemDescription = [];
+    let mStringDescription = [];
+    let i = 2;
+    let j = 0;
+    let tempVar = ''; // variable for replacement, what we want to replace
+    let tempVar2 = ''; // variable for replacement, on what we replace
     while (document.evaluate('//*[@id="div_0"]/table/tbody/tr[' + i + ']', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null) {
         mStringDescription[j] = document.evaluate('//*[@id="div_0"]/table/tbody/tr[' + i + ']', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
         tempVar = 'savedCustomers[0].savedCustomerItems[' + j + ']';
@@ -189,17 +197,20 @@ function mUnmobile() {
 
 // function that create mobile view login page
 function mCreateLogin() {
-    var lpBecomeRepSl = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div/div[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
-    var lpHotOffer = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div/div[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
-    var mLoginUserID = document.getElementById('loginuserid').outerHTML;
+    let lpBecomeRepSl = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div/div[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
+    let lpHotOffer = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div/div[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
+    let mLoginUserID = document.getElementById('loginuserid').outerHTML;
+    // noinspection JSUnusedAssignment
     mLoginUserID = mLoginUserID.replace('id="loginuserid"', 'id="mLoginUserID"');
-    var mLoginPassword = document.getElementById('loginpassword').outerHTML;
+    let mLoginPassword = document.getElementById('loginpassword').outerHTML;
+    // noinspection JSUnusedAssignment
     mLoginPassword = mLoginPassword.replace('id="loginpassword"', 'id="mLoginPassword"');
-    var mSubmitBtn = document.getElementById('submitBtn').outerHTML;
+    let mSubmitBtn = document.getElementById('submitBtn').outerHTML;
+    // noinspection JSUnusedAssignment
     mSubmitBtn = mSubmitBtn.replace('id="submitBtn"', 'id="mSubmitBtn"');
     lpBecomeRepSl.id = "lpBecomeRepSl";
     // appendChild
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = "lpLoginDiv";
     mLoginUserID = '<input type="text" placeholder="Рахунок представника" id="mLoginUserID">';
     mLoginPassword = '<input type="password" placeholder="Пароль" id="mLoginPassword">';
@@ -226,8 +237,8 @@ function mPlaceAnOrder() {
     }
     //create new basket
     //var mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
-    var mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
-    var newBusket = '<div>Кампанія ' + mCampainNumber + '<br><img id="mCatalogOnPAO" src="http://static.avon.com.ua/REPSuite/static/homepage/img_2018/bro_icon.jpg">' + '<br><input id="mButtonCatalogOnPAO" type="button" value="Розмістити замовлення" onclick="mGoFromPlaceAnOrder()"></div>';
+    let mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
+    let newBusket = '<div>Кампанія ' + mCampainNumber + '<br><img id="mCatalogOnPAO" src="http://static.avon.com.ua/REPSuite/static/homepage/img_2018/bro_icon.jpg">' + '<br><input id="mButtonCatalogOnPAO" type="button" value="Розмістити замовлення" onclick="mGoFromPlaceAnOrder()"></div>';
     //end create new basket
     if (document.getElementById('TB_overlay') != null) {
         document.getElementById('TB_overlay').style.display = "none"; // hide gray background
@@ -241,20 +252,20 @@ function mPlaceAnOrder() {
     }
 
     document.evaluate('/html/body/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.style.display = "none";
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = "mPlaceAnOrder";
     //div.innerHTML = document.evaluate('//*[@id="highlitePAO_PAO_Header"]/div/table/tbody/tr[3]/td', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML; // default basket
     div.innerHTML = newBusket;
     document.body.appendChild(div);
-    mTextForHelp = 'Some content lorem ipsum dolor sit amet, con.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non ullamcorper dui. Morbi volutpat dui risus, sit amet finibus tellus dapibus vel. Suspendisse bibendum ipsum sem, in faucibus dui vehicula eget. Aliquam sit amet diam erat. Quisque ac mattis lorem. Aenean nec augue efficitur, tristique turpis at, porta dolor. Pellentesque ante tortor, porttitor et libero et, venenatis vestibulum nibh. Etiam egestas lacinia dui, sit amet viverra leo interdum ut. Etiam blandit ipsum at ultricies pretium. Sed id congue tellus. Phasellus efficitur vehicula bibendum. Ut ut sem ut nisi venenatis luctus.<br><br>Nullam tempus nisi orci, et aliquam sem pharetra et. Pellentesque sit amet tincidunt metus. Sed ac arcu mollis, accumsan lacus eu, placerat ipsum. Integer lobortis, dolor quis elementum finibus, felis nisi vulputate magna, ac lobortis elit mi vitae lacus. Donec ultricies lorem et convallis tempus. Curabitur nisi lacus, iaculis ut dui sed, consectetur faucibus neque. Sed at nibh id orci gravida elementum. Vestibulum pulvinar tortor pharetra cursus accumsan.'
-    if (localStorage.getItem('helpPlaceAnOrder') == 'true') {
+    mTextForHelp = 'Some content lorem ipsum dolor sit amet, con.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non ullamcorper dui. Morbi volutpat dui risus, sit amet finibus tellus dapibus vel. Suspendisse bibendum ipsum sem, in faucibus dui vehicula eget. Aliquam sit amet diam erat. Quisque ac mattis lorem. Aenean nec augue efficitur, tristique turpis at, porta dolor. Pellentesque ante tortor, porttitor et libero et, venenatis vestibulum nibh. Etiam egestas lacinia dui, sit amet viverra leo interdum ut. Etiam blandit ipsum at ultricies pretium. Sed id congue tellus. Phasellus efficitur vehicula bibendum. Ut ut sem ut nisi venenatis luctus.<br><br>Nullam tempus nisi orci, et aliquam sem pharetra et. Pellentesque sit amet tincidunt metus. Sed ac arcu mollis, accumsan lacus eu, placerat ipsum. Integer lobortis, dolor quis elementum finibus, felis nisi vulputate magna, ac lobortis elit mi vitae lacus. Donec ultricies lorem et convallis tempus. Curabitur nisi lacus, iaculis ut dui sed, consectetur faucibus neque. Sed at nibh id orci gravida elementum. Vestibulum pulvinar tortor pharetra cursus accumsan.';
+    if (localStorage.getItem('helpPlaceAnOrder') === 'true') {
         //nothing
     } else {
         mHelpOverlay(mTextForHelp);
     }
 }
 
-function orderEntry() {}
+//function orderEntry() {}
 /* notes
 blanc login data:
 document.getElementById('loginuserid').value = "8610786";
@@ -267,15 +278,15 @@ if (typeof mSriptLoaded !== "undefined") {
 }
 else {
     // not determined
-    var script = document.createElement("script");
+    let script = document.createElement("script");
     script.src = 'https://temnui.com/avontest/forMobile.js';
     document.head.appendChild(script);
-    var mSriptLoaded = 1;
+    let mSriptLoaded = 1;
 }
 */
 //  function that start main process for mobile
 function mStart() {
-    //var mBody = document.getElementsByTagName('body');
+    //let mBody = document.getElementsByTagName('body');
     //mBody[0].innerHTML = mBody[0].innerHTML + '<div id="mobileBody"></div>';
     /* Set the ID to the required tags */
     //example: document.evaluate('xpath', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE
@@ -283,18 +294,18 @@ function mStart() {
     // //*[@id="mOldBody"]/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div/div[2]
     // /html/body
     /*
-    var lpLogin = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
-    var lpBanner = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
-    var lpBottomMenu = document.evaluate('/html/body/table/tbody/tr[3]/td/table/tbody/tr[2]/td/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
+    let lpLogin = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
+    let lpBanner = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
+    let lpBottomMenu = document.evaluate('/html/body/table/tbody/tr[3]/td/table/tbody/tr[2]/td/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
     */
     /* End of set the ID to the required tags */
     // import css
-    var tag_css = document.createElement('link');
+    let tag_css = document.createElement('link');
     tag_css.rel = 'stylesheet';
     tag_css.href = 'http://temnui.com/avontest/forMobile.css'; // css source
     //tag_css.href = 'http://www.avon.com.ua/REPSuite/static/css/forMobile.css'; // css source
     tag_css.type = 'text/css';
-    var tag_head = document.getElementsByTagName('head');
+    let tag_head = document.getElementsByTagName('head');
     tag_head[0].appendChild(tag_css);
     // end import css
     if (/loginMain/.test(window.location.pathname)) {
@@ -315,24 +326,26 @@ function mStart() {
         mOrderConfirmationPage();
     }
     //create back to desktop view button
-    var mUnmobileButton = '<div class="mMiddle"><input id="mGoToDesktop" type="submit" value="Повна версія сайту" onclick="mUnmobile()"></div>';
-    var div = document.createElement('div');
+    let mUnmobileButton = '<div class="mMiddle"><input id="mGoToDesktop" type="submit" value="Повна версія сайту" onclick="mUnmobile()"></div>';
+    let div = document.createElement('div');
     div.id = "mOrderConfirmationPage";
     div.innerHTML = mUnmobileButton;
     document.body.appendChild(div);
 }
 
+// noinspection JSUnusedGlobalSymbols
 function mSkipSim() {
-    if (localStorage.getItem('mobileOrder') == 'true') {
+    if (localStorage.getItem('mobileOrder') === 'true') {
         $(document).ready(function() {
+            // noinspection JSUnresolvedFunction this function we use from teamsite
             forward();
         });
     }
 }
 
 function getFromAAO(path) {
-    var value = '';
-    var newPath = path;
+    let value = '';
+    let newPath = path;
     $(document).ready(function() {
         value = newPath;
         if (newPath == AvonAnalyticsObjex.Profile.campaignInfo) {
@@ -342,15 +355,15 @@ function getFromAAO(path) {
     return value;
 }
 
-var mDetails = '';
+let mDetails = '';
 
 function mDeliveryPage() {
-    var mDeliveryAddr = '<div id="mDeliveryAddr">Оберіть тип доставки <div onclick="mDeliveryMore();">Детальніше</div></div>';
-    var mDeliveryAddrRadio = document.getElementById('deliveryType').outerHTML;
-    var mRecipient = document.getElementsByClassName('padding_port_body2')[0];
+    let mDeliveryAddr = '<div id="mDeliveryAddr">Оберіть тип доставки <div onclick="mDeliveryMore();">Детальніше</div></div>';
+    let mDeliveryAddrRadio = document.getElementById('deliveryType').outerHTML;
+    let mRecipient = document.getElementsByClassName('padding_port_body2')[0];
     mRecipient = mRecipient.outerHTML;
     mRecipient = mRecipient.replace('height="100%"', '');
-    var mBtnContinue = '<br><div class="mMiddle"><button type="button" onclick="SubmitPagePort(\'orderSummary.page\',99,99,\'No\',\'true\',\'true\');"> Продовжити </button></div>';
+    let mBtnContinue = '<br><div class="mMiddle"><button type="button" onclick="SubmitPagePort(\'orderSummary.page\',99,99,\'No\',\'true\',\'true\');"> Продовжити </button></div>';
     //mDeliveryAddrRadio = mDeliveryAddrRadio.replace('deliveryType', 'mDeliveryType');
     //mDeliveryAddrRadio = mDeliveryAddrRadio.replace(/deliveryTypeSelected/g, 'mdeliveryTypeSelected');
     if (document.getElementsByClassName('padding_port_address_body1')[1] == undefined) {
@@ -362,27 +375,27 @@ function mDeliveryPage() {
     }
     mDeliveryAddrRadio = mDeliveryAddrRadio.replace(/updateDeliveryMethod\(this\)/g, "updateDeliveryMethod(this); updatemDetails();");
     mDeliveryAddrRadio = mDeliveryAddrRadio.replace('input', 'input onmousedown="updatemDetails(\'test\');"');
-    var mPayment = document.getElementById('payment_highlighter').outerHTML;
+    let mPayment = document.getElementById('payment_highlighter').outerHTML;
     mPayment = mPayment.replace('payment_highlighter', 'mpayment_highlighter');
     mPayment = mPayment.replace('height="100%"', '');
     mPayment = mPayment.replace('javascript:OpenLearnMorePM', 'mReadMorePM');
-    var mContent = mDeliveryAddr + mDeliveryAddrRadio + '<br><div id="mDetails">' + mDetails + '</div>' + mPayment + mBtnContinue; // add mRecipient after mPayment
-    var div = document.createElement('div');
+    let mContent = mDeliveryAddr + mDeliveryAddrRadio + '<br><div id="mDetails">' + mDetails + '</div>' + mPayment + mBtnContinue; // add mRecipient after mPayment
+    div = document.createElement('div');
     div.id = "mDeliveryContent";
     div.innerHTML = mContent;
     document.body.appendChild(div);
     //create popup with delivery details
     mReadMore = document.getElementsByClassName('LearnMoreDM_txt')[0].outerHTML;
     mReadMoreClose = '<span id="backArrow" onclick="mDeliveryMore()"><<</span>';
-    var div = document.createElement('div');
+    div = document.createElement('div');
     div.id = "mReadMore";
     div.innerHTML = mReadMoreClose + mReadMore + mReadMoreClose;
     document.body.appendChild(div);
     document.getElementById('mReadMore').style.display = 'none';
     //create popup with payment method details
-    var mReadMorePM = document.getElementsByClassName('LearnMorePM_txt')[0].outerHTML;
+    let mReadMorePM = document.getElementsByClassName('LearnMorePM_txt')[0].outerHTML;
     mReadMorePMClose = '<span id="backArrow" onclick="mReadMorePM()"><<</span>';
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = "mReadMorePM";
     div.innerHTML = mReadMorePMClose + mReadMorePM + mReadMorePMClose;
     document.body.appendChild(div);
@@ -425,20 +438,20 @@ function mGoToDeliveryFn() {
 }
 
 function mSubTotalPage() {
-    var pageHeader = '<h1>Підсумок замовлення</h1>';
-    var deliveryTypeH = '<h2>Тип доставки</h2>';
-    var deliveryTypeT = 'Ви обрали наступний тип доставки: ';
-    var deliveryType = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[5]/td[6]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
-    var deliveryDetailsH = '<h2>Деталі доставки</h2>';
-    var deliveryDetailsT = 'Ваше замовлення буде доставлене: ';
-    var deliveryDetails = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[4]/td[11]/div/div[2]/table/tbody/tr[3]/td[2]/div/div[1]/table/tbody/tr[3]/td[1]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
-    var deliveryDateT = 'Орієнтована дата доставки: ';
-    var deliveryDate = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[10]/td[17]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
-    var paymentMethodH = '<h2>Спосіб оплати</h2>';
-    var paymentMethodT = 'Ви обрали наступний спосіб оплати: ';
-    var paymentMethod = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[4]/td[15]/div/div[2]/table/tbody/tr[3]/td[2]/div/div[2]/table/tbody/tr[3]/td[2]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
-    var goodsNoDiscountH = '<br><h2>Товари без знижки:</h2>';
-    var goodsNoDiscount = '';
+    let pageHeader = '<h1>Підсумок замовлення</h1>';
+    let deliveryTypeH = '<h2>Тип доставки</h2>';
+    let deliveryTypeT = 'Ви обрали наступний тип доставки: ';
+    let deliveryType = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[5]/td[6]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
+    let deliveryDetailsH = '<h2>Деталі доставки</h2>';
+    let deliveryDetailsT = 'Ваше замовлення буде доставлене: ';
+    let deliveryDetails = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[4]/td[11]/div/div[2]/table/tbody/tr[3]/td[2]/div/div[1]/table/tbody/tr[3]/td[1]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
+    let deliveryDateT = 'Орієнтована дата доставки: ';
+    let deliveryDate = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[10]/td[17]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
+    let paymentMethodH = '<h2>Спосіб оплати</h2>';
+    let paymentMethodT = 'Ви обрали наступний спосіб оплати: ';
+    let paymentMethod = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[4]/td[15]/div/div[2]/table/tbody/tr[3]/td[2]/div/div[2]/table/tbody/tr[3]/td[2]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
+    let goodsNoDiscountH = '<br><h2>Товари без знижки:</h2>';
+    let goodsNoDiscount = '';
     if (document.evaluate('//*[@id="panel_nodiscount"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue !== null) {
         goodsNoDiscount = '<div id="mGoodsNoDiscount">';
         goodsNoDiscount += document.evaluate('//*[@id="panel_nodiscount"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
@@ -446,41 +459,41 @@ function mSubTotalPage() {
     }
     goodsNoDiscount = goodsNoDiscount.replace('<table cellpadding="0"', '<table id="goodsNoDiscount" cellpadding="0"');
     //goodsNoDiscount = goodsNoDiscount + '<br>' + 'Всього за товари без знижки: ' + document.evaluate('//*[@id="goodsNoDiscount"]/tbody/tr[position()=last()-1]/td[2]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
-    var goodsFreeH = '';
-    var goodsFree = '';
+    let goodsFreeH = '';
+    let goodsFree = '';
     if (document.evaluate('//*[@id="panel_nocost"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null) {
         goodsFreeH = '<h2><br>Безкоштовні товари в цьому замовленні:</h2>';
         goodsFree = '<div id="mGoodsFree">';
         goodsFree += document.evaluate('//*[@id="panel_nocost"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
         goodsFree += '</div>';
     }
-    var allGoods = '';
-    var allGoodsH = '<br><h2>Товари, замовлені в цій кампанії<h2>';
+    let allGoods = '';
+    let allGoodsH = '<br><h2>Товари, замовлені в цій кампанії<h2>';
     if (document.evaluate('//*[@id="panel_savedItems"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue !== null) {
         allGoods = '<div id="mAllGoods">';
         allGoods += document.evaluate('//*[@id="panel_savedItems"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
         allGoods += '</div>';
     }
-    var tempVar = document.getElementById('headerGomac').innerHTML;
+    let tempVar = document.getElementById('headerGomac').innerHTML;
     tempVar = tempVar.replace(/style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 12px; line-height: 1.1640625; font-weight: bold;"/g, "class=\"totalSummAll\"");
     document.getElementById('headerGomac').innerHTML = tempVar;
-    var totalSummAll = document.getElementsByClassName('totalSummAll');
-    var summWithDiscount = totalSummAll[0].innerHTML;
+    let totalSummAll = document.getElementsByClassName('totalSummAll');
+    let summWithDiscount = totalSummAll[0].innerHTML;
     summWithDiscount = summWithDiscount + ' ' + totalSummAll[1].innerHTML + '<br>';
-    var discount = totalSummAll[2].innerHTML;
+    let discount = totalSummAll[2].innerHTML;
     discount = discount + ' ' + totalSummAll[3].innerHTML + '<br>';
-    var totalSumm = totalSummAll[4].innerHTML;
+    let totalSumm = totalSummAll[4].innerHTML;
     totalSumm = totalSumm + ' ' + totalSummAll[5].innerHTML + '<br>';
-    var aditionalService = totalSummAll[6].innerHTML;
+    let aditionalService = totalSummAll[6].innerHTML;
     aditionalService = aditionalService + ' ' + totalSummAll[7].innerHTML + '<br>';
-    var terms = '<p>ВАЖЛИВО! Натискаючи кнопку «Відправити замовлення у Avon» Ви погоджуєтеся з наступним: Ви надаєте ДП «Ейвон Косметікс Юкрейн» згоду на обробку персональних даних на умовах, визначених згодою на обробку персональних даних , яка розміщена тут Ви належним чином повідомлені про включення Ваших персональних даних до бази персональних даних ДП «Ейвон Косметікс Юкрейн», про мету отримання та обробки своїх персональних даних та їх передачу третім особам Ви ознайомлені зі своїми правами як суб’єкта персональних даних та</span></p>';
+    let terms = '<p>ВАЖЛИВО! Натискаючи кнопку «Відправити замовлення у Avon» Ви погоджуєтеся з наступним: Ви надаєте ДП «Ейвон Косметікс Юкрейн» згоду на обробку персональних даних на умовах, визначених згодою на обробку персональних даних , яка розміщена тут Ви належним чином повідомлені про включення Ваших персональних даних до бази персональних даних ДП «Ейвон Косметікс Юкрейн», про мету отримання та обробки своїх персональних даних та їх передачу третім особам Ви ознайомлені зі своїми правами як суб’єкта персональних даних та</span></p>';
     //checkbox
-    var checkBox = document.getElementById('submissionCheck').outerHTML;
-    var submitButton = document.getElementById('subButton').outerHTML;
+    let checkBox = document.getElementById('submissionCheck').outerHTML;
+    let submitButton = document.getElementById('subButton').outerHTML;
     checkBox = checkBox.replace('id="submissionCheck"', 'msubmissionCheck" onchange = "mCheckedOnSubtotalPage()"');
-    var textCheckBox = '<span id="textCheckBox">Я підтверджую, що ознайомлений з усією наданою інформацією.</span>';
+    let textCheckBox = '<span id="textCheckBox">Я підтверджую, що ознайомлений з усією наданою інформацією.</span>';
     // create div for page
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = "mSubTotalPage";
     div.innerHTML = pageHeader + deliveryTypeH + deliveryTypeT + deliveryType + deliveryDetailsH + deliveryDetailsT + deliveryDetails + deliveryDetails + deliveryDateT + deliveryDate + paymentMethodH + paymentMethodT + paymentMethod + allGoodsH + allGoods + goodsNoDiscountH + goodsNoDiscount + goodsFreeH + goodsFree + '<div id="mSubTotal"><div id="mSumms"><p>' + summWithDiscount + discount + totalSumm + aditionalService + '</p></div>' + terms + checkBox + textCheckBox + '<br>' + submitButton + '</div>';
     div.innerHTML = replaceAll(div.innerHTML, 'style="font-family: \'DejaVu Sans\', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.1635742;"', 'class = "mMyTable"');
@@ -502,20 +515,20 @@ function mCheckedOnSubtotalPage() {
 }
 
 function mOrderConfirmationPage() {
-    var header = '<h1>Замовлення було успішно відправлено</h1>';
-    var header2 = '<h2>Деталі замовлення:</h2>';
-    var mText = document.evaluate('/html/body/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[1]/td/table/tbody/tr/td/div/div/form/table/tbody/tr[2]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[1]/td[1]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
+    let header = '<h1>Замовлення було успішно відправлено</h1>';
+    let header2 = '<h2>Деталі замовлення:</h2>';
+    let mText = document.evaluate('/html/body/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[1]/td/table/tbody/tr/td/div/div/form/table/tbody/tr[2]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[1]/td[1]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
     mText = mText.replace('width="375"', 'width="100%"');
-    var mGoToHomepage = '<div class="mMiddle"><button class="mMiddleButton" type="button" onclick="window.location.href=\'PlaceAnOrder.page\'">На головну</button></div>';
+    let mGoToHomepage = '<div class="mMiddle"><button class="mMiddleButton" type="button" onclick="window.location.href=\'PlaceAnOrder.page\'">На головну</button></div>';
     // create div for page
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = "mOrderConfirmationPage";
     div.innerHTML = header + header2 + mText + '<br>' + mGoToHomepage;
     document.body.appendChild(div);
 }
 
 function mGoFromPlaceAnOrder() {
-    var mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
+    let mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
     submitFormPao(mCampainNumber);
 }
 
@@ -523,7 +536,7 @@ function mHelpOverlay(mTextForHelp) {
     mClose = '<input type="button" value=" X " id="mCloseButton" onClick="mHideHelpOverlay()">';
     mHelpContent = '<div id="mHelpContent">' + mTextForHelp + '</div>';
     // create div for page
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = "mHelpOverlay";
     div.innerHTML = mClose + mHelpContent;
     document.body.appendChild(div);
@@ -534,7 +547,7 @@ function mHideHelpOverlay() {
     localStorage.setItem('helpPlaceAnOrder', 'true');
 }
 
-var meta = document.createElement('meta');
+let meta = document.createElement('meta');
 meta.httpEquiv = "X-UA-Compatible";
 meta.name = "viewport";
 meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0";
