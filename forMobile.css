@@ -115,9 +115,7 @@ button {
     width: 14%;
     font-size: 2.5vh;
     text-align: left;
-    background-image: url(http://www.avon.com.ua/REPSuite/static/images/trash-can.svg);
-    background-repeat:no-repeat;
-    background-position:right;
+    background: url(http://www.avon.com.ua/REPSuite/static/images/trash-can.svg) no-repeat right;
 }
 
 .linearFormInputQty {
@@ -190,13 +188,11 @@ button {
 }
 
 #mPlaceAnOrder {
-    margin: 0 auto;
     text-align: center;
-    margin-top: 10%;
+    margin: 10% auto 0;
     font-size: 3vh;
     border: 1pt #ccc solid;
     padding: 1vh;
-    padding-top: 1vh;
     width: 80%;
 }
 #mGoToDesktop {
@@ -352,15 +348,12 @@ label {
 }
 
 #mLoaderImg {
-    background-image: url(http://temnui.com/avontest/img/loader.gif);
-    background-color: white;
     width: 100%;
     height: 100%;
     position: absolute;
     z-index: 1000;
     display: block;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: white url(http://temnui.com/avontest/img/loader.gif) no-repeat center;
 }
 
 #mReadMore {
@@ -531,8 +524,7 @@ h2 {
 #mDeleteChecked {
     clear:both;
     display:block;
-    margin: 0 auto;
-    margin-top: 2vh;
+    margin: 2vh auto 0;
     width: 75%;
     height: 5vh;
     font-size: 3vh;
@@ -616,7 +608,7 @@ h2 {
     position: fixed;
     bottom: 0;
     background-color: white;
-    box-shadow: 0px -5px 5px #ccc;
+    box-shadow: 0 -5px 5px #ccc;
     border: solid 1px #c0c0c0;
 }
 
