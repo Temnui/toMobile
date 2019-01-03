@@ -163,11 +163,13 @@ function mCreateBody() {
     let tempVar = ''; // variable for replacement, what we want to replace
     let tempVar2 = ''; // variable for replacement, on what we replace
     while (document.evaluate('//*[@id="div_0"]/table/tbody/tr[' + i + ']', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null) {
+        // noinspection JSUnresolvedVariable
         mStringDescription[j] = document.evaluate('//*[@id="div_0"]/table/tbody/tr[' + i + ']', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
         tempVar = 'savedCustomers[0].savedCustomerItems[' + j + ']';
         tempVar2 = 'mSavedCustomer[' + j + ']';
         mStringDescription[j] = replaceAll(mStringDescription[j], tempVar, tempVar2);
         mStringDescription[j] = mStringDescription[j].replace('checkUncheckInner\(\)', 'setForDelete\(' + j + '\)');
+        // noinspection JSUnresolvedVariable
         mItemDescription[j] = document.evaluate('//*[@id="div_0"]/table/tbody/tr[' + i + ']/td[4]/table/tbody/tr/td[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
         //try delete unnecessary rows in old body to remove duplicate ID`s
         //document.evaluate('//*[@id="div_0"]/table/tbody/tr[' + i + ']', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML = '';
@@ -186,6 +188,7 @@ function mCreateBody() {
 function mCheckout() {
     mQuantityOfProducts = 0;
     sessionStorage.setItem('mQuantityOfProducts', mQuantityOfProducts);
+    // noinspection JSUnresolvedFunction
     updateOrder();
 }
 
@@ -197,7 +200,9 @@ function mUnmobile() {
 
 // function that create mobile view login page
 function mCreateLogin() {
+    // noinspection JSUnresolvedVariable
     let lpBecomeRepSl = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div/div[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
+    // noinspection JSUnresolvedVariable
     let lpHotOffer = document.evaluate('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[1]/span/div/div[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
     let mLoginUserID = document.getElementById('loginuserid').outerHTML;
     // noinspection JSUnusedAssignment
@@ -227,37 +232,43 @@ function mCreateLogin() {
 function mSubmit() {
     document.getElementById('loginuserid').value = document.getElementById('mLoginUserID').value;
     document.getElementById('loginpassword').value = document.getElementById('mLoginPassword').value;
+    // noinspection JSUnresolvedFunction
     login();
 }
 
 function mPlaceAnOrder() {
     // skip SIM
     if (document.evaluate('/html/body/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr/td/div/table/tbody/tr/td/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null) {
+        // noinspection JSUnresolvedFunction
         forward();
     }
     //create new basket
-    //var mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
+    //var mCampainNumber = AvonAnalyticsObject.Profile.campaignInfo.replace(':C', '/');
+    // noinspection JSUnresolvedVariable
     let mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
     let newBusket = '<div>Кампанія ' + mCampainNumber + '<br><img id="mCatalogOnPAO" src="http://static.avon.com.ua/REPSuite/static/homepage/img_2018/bro_icon.jpg">' + '<br><input id="mButtonCatalogOnPAO" type="button" value="Розмістити замовлення" onclick="mGoFromPlaceAnOrder()"></div>';
     //end create new basket
     if (document.getElementById('TB_overlay') != null) {
         document.getElementById('TB_overlay').style.display = "none"; // hide gray background
+        // noinspection JSUnresolvedVariable
         document.evaluate('//*[@id="TB_overlay"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.style.display = "none";
     }
 
     if (document.getElementById('TB_window') != null) {
         document.getElementById('TB_window').style.display = "none"; // hide pop-up with question about e-mail
         document.evaluate('//*[@id="TB_window"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML = '<div id="TB_window"></div>';
+        // noinspection JSUnresolvedVariable
         document.evaluate('//*[@id="TB_window"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.style.display = "none";
     }
 
+    // noinspection JSUnresolvedVariable
     document.evaluate('/html/body/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.style.display = "none";
     let div = document.createElement('div');
     div.id = "mPlaceAnOrder";
     //div.innerHTML = document.evaluate('//*[@id="highlitePAO_PAO_Header"]/div/table/tbody/tr[3]/td', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML; // default basket
     div.innerHTML = newBusket;
     document.body.appendChild(div);
-    mTextForHelp = 'Some content lorem ipsum dolor sit amet, con.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non ullamcorper dui. Morbi volutpat dui risus, sit amet finibus tellus dapibus vel. Suspendisse bibendum ipsum sem, in faucibus dui vehicula eget. Aliquam sit amet diam erat. Quisque ac mattis lorem. Aenean nec augue efficitur, tristique turpis at, porta dolor. Pellentesque ante tortor, porttitor et libero et, venenatis vestibulum nibh. Etiam egestas lacinia dui, sit amet viverra leo interdum ut. Etiam blandit ipsum at ultricies pretium. Sed id congue tellus. Phasellus efficitur vehicula bibendum. Ut ut sem ut nisi venenatis luctus.<br><br>Nullam tempus nisi orci, et aliquam sem pharetra et. Pellentesque sit amet tincidunt metus. Sed ac arcu mollis, accumsan lacus eu, placerat ipsum. Integer lobortis, dolor quis elementum finibus, felis nisi vulputate magna, ac lobortis elit mi vitae lacus. Donec ultricies lorem et convallis tempus. Curabitur nisi lacus, iaculis ut dui sed, consectetur faucibus neque. Sed at nibh id orci gravida elementum. Vestibulum pulvinar tortor pharetra cursus accumsan.';
+    let mTextForHelp = 'Some long content';
     if (localStorage.getItem('helpPlaceAnOrder') === 'true') {
         //nothing
     } else {
@@ -267,7 +278,7 @@ function mPlaceAnOrder() {
 
 //function orderEntry() {}
 /* notes
-blanc login data:
+blank login data:
 document.getElementById('loginuserid').value = "8610786";
 document.getElementById('loginpassword').value = "123abc";
 login();
@@ -336,14 +347,15 @@ function mStart() {
 // noinspection JSUnusedGlobalSymbols
 function mSkipSim() {
     if (localStorage.getItem('mobileOrder') === 'true') {
+        // noinspection JSUnresolvedFunction
         $(document).ready(function() {
             // noinspection JSUnresolvedFunction this function we use from teamsite
             forward();
         });
     }
 }
-
-function getFromAAO(path) {
+// something unknown:
+/*function getFromAAO(path) {
     let value = '';
     let newPath = path;
     $(document).ready(function() {
@@ -353,7 +365,7 @@ function getFromAAO(path) {
         }
     });
     return value;
-}
+}*/
 
 let mDetails = '';
 
@@ -361,12 +373,14 @@ function mDeliveryPage() {
     let mDeliveryAddr = '<div id="mDeliveryAddr">Оберіть тип доставки <div onclick="mDeliveryMore();">Детальніше</div></div>';
     let mDeliveryAddrRadio = document.getElementById('deliveryType').outerHTML;
     let mRecipient = document.getElementsByClassName('padding_port_body2')[0];
-    mRecipient = mRecipient.outerHTML;
-    mRecipient = mRecipient.replace('height="100%"', '');
+    // noinspection JSUnusedAssignment
+    mRecipient = mRecipient.outerHTML.replace('height="100%"', '');
+    //mRecipient = mRecipient.replace('height="100%"', '');
+    // noinspection JSUnresolvedFunction
     let mBtnContinue = '<br><div class="mMiddle"><button type="button" onclick="SubmitPagePort(\'orderSummary.page\',99,99,\'No\',\'true\',\'true\');"> Продовжити </button></div>';
     //mDeliveryAddrRadio = mDeliveryAddrRadio.replace('deliveryType', 'mDeliveryType');
     //mDeliveryAddrRadio = mDeliveryAddrRadio.replace(/deliveryTypeSelected/g, 'mdeliveryTypeSelected');
-    if (document.getElementsByClassName('padding_port_address_body1')[1] == undefined) {
+    if (document.getElementsByClassName('padding_port_address_body1')[1] === undefined) {
         mDetails = document.getElementsByClassName('padding_port_address_body1')[0];
         mDetails = mDetails.outerHTML;
     } else {
@@ -385,8 +399,8 @@ function mDeliveryPage() {
     div.innerHTML = mContent;
     document.body.appendChild(div);
     //create popup with delivery details
-    mReadMore = document.getElementsByClassName('LearnMoreDM_txt')[0].outerHTML;
-    mReadMoreClose = '<span id="backArrow" onclick="mDeliveryMore()"><<</span>';
+    let mReadMore = document.getElementsByClassName('LearnMoreDM_txt')[0].outerHTML;
+    let mReadMoreClose = '<span id="backArrow" onclick="mDeliveryMore()"><<</span>';
     div = document.createElement('div');
     div.id = "mReadMore";
     div.innerHTML = mReadMoreClose + mReadMore + mReadMoreClose;
@@ -394,7 +408,7 @@ function mDeliveryPage() {
     document.getElementById('mReadMore').style.display = 'none';
     //create popup with payment method details
     let mReadMorePM = document.getElementsByClassName('LearnMorePM_txt')[0].outerHTML;
-    mReadMorePMClose = '<span id="backArrow" onclick="mReadMorePM()"><<</span>';
+    let mReadMorePMClose = '<span id="backArrow" onclick="mReadMorePM()"><<</span>';
     let div = document.createElement('div');
     div.id = "mReadMorePM";
     div.innerHTML = mReadMorePMClose + mReadMorePM + mReadMorePMClose;
@@ -402,11 +416,12 @@ function mDeliveryPage() {
     document.getElementById('mReadMorePM').style.display = 'none';
     // auto set number of clients
     document.getElementById('servedCustomerCount').value = '1';
+    // noinspection JSUnresolvedFunction
     setDirtyValue();
 }
 
 function mReadMorePM() {
-    if (document.getElementById('mReadMorePM').style.display == 'none') {
+    if (document.getElementById('mReadMorePM').style.display === 'none') {
         document.getElementById('mReadMorePM').style.display = 'block';
     } else {
         document.getElementById('mReadMorePM').style.display = 'none';
@@ -415,7 +430,7 @@ function mReadMorePM() {
 }
 
 function mDeliveryMore() {
-    if (document.getElementById('mReadMore').style.display == 'none') {
+    if (document.getElementById('mReadMore').style.display === 'none') {
         document.getElementById('mReadMore').style.display = 'block';
     } else {
         document.getElementById('mReadMore').style.display = 'none';
@@ -423,9 +438,10 @@ function mDeliveryMore() {
     }
 }
 
+// noinspection JSUnusedGlobalSymbols
 function updatemDetails(value) {
     document.getElementsByClassName('padding_port_address_body1')[1].outerHTML = document.getElementsByClassName('padding_port_address_body1')[0].outerHTML;
-    mUpdateMpayment = document.getElementById('payment_highlighter').outerHTML;
+    let mUpdateMpayment = document.getElementById('payment_highlighter').outerHTML;
     mUpdateMpayment = mUpdateMpayment.replace('payment_highlighter', 'mpayment_highlighter');
     mUpdateMpayment = mUpdateMpayment.replace('height="100%"', '');
     document.getElementById('mpayment_highlighter').outerHTML = mUpdateMpayment;
@@ -441,19 +457,24 @@ function mSubTotalPage() {
     let pageHeader = '<h1>Підсумок замовлення</h1>';
     let deliveryTypeH = '<h2>Тип доставки</h2>';
     let deliveryTypeT = 'Ви обрали наступний тип доставки: ';
+    // noinspection JSUnresolvedVariable
     let deliveryType = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[5]/td[6]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
     let deliveryDetailsH = '<h2>Деталі доставки</h2>';
     let deliveryDetailsT = 'Ваше замовлення буде доставлене: ';
+    // noinspection JSUnresolvedVariable
     let deliveryDetails = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[4]/td[11]/div/div[2]/table/tbody/tr[3]/td[2]/div/div[1]/table/tbody/tr[3]/td[1]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
     let deliveryDateT = 'Орієнтована дата доставки: ';
+    // noinspection JSUnresolvedVariable
     let deliveryDate = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[10]/td[17]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
     let paymentMethodH = '<h2>Спосіб оплати</h2>';
     let paymentMethodT = 'Ви обрали наступний спосіб оплати: ';
+    // noinspection JSUnresolvedVariable
     let paymentMethod = document.evaluate('//*[@id="headerGomac"]/form/table/tbody/tr/td/table[2]/tbody/tr/td[2]/table/tbody/tr[4]/td[15]/div/div[2]/table/tbody/tr[3]/td[2]/div/div[2]/table/tbody/tr[3]/td[2]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
     let goodsNoDiscountH = '<br><h2>Товари без знижки:</h2>';
     let goodsNoDiscount = '';
     if (document.evaluate('//*[@id="panel_nodiscount"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue !== null) {
         goodsNoDiscount = '<div id="mGoodsNoDiscount">';
+        // noinspection JSUnresolvedVariable
         goodsNoDiscount += document.evaluate('//*[@id="panel_nodiscount"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
         goodsNoDiscount += '</div>';
     }
@@ -464,6 +485,7 @@ function mSubTotalPage() {
     if (document.evaluate('//*[@id="panel_nocost"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null) {
         goodsFreeH = '<h2><br>Безкоштовні товари в цьому замовленні:</h2>';
         goodsFree = '<div id="mGoodsFree">';
+        // noinspection JSUnresolvedVariable
         goodsFree += document.evaluate('//*[@id="panel_nocost"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
         goodsFree += '</div>';
     }
@@ -471,6 +493,7 @@ function mSubTotalPage() {
     let allGoodsH = '<br><h2>Товари, замовлені в цій кампанії<h2>';
     if (document.evaluate('//*[@id="panel_savedItems"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue !== null) {
         allGoods = '<div id="mAllGoods">';
+        // noinspection JSUnresolvedVariable
         allGoods += document.evaluate('//*[@id="panel_savedItems"]/div/div[2]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
         allGoods += '</div>';
     }
@@ -501,15 +524,18 @@ function mSubTotalPage() {
     div.innerHTML = replaceAll(div.innerHTML, 'style="font-family: \'DejaVu Sans\', Arial, Helvetica, sans-serif; color: #000000; font-size: 11px; line-height: 1.1635742; font-weight: bold;"', 'class = "mMyTableHeader"');
     div.innerHTML = replaceAll(div.innerHTML, 'Кількість', 'N');
     document.body.appendChild(div);
+    // noinspection JSUnresolvedVariable
     if (document.evaluate('//*[@id="mAllGoods"]/table/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML != null) {
         document.evaluate('//*[@id="mAllGoods"]/table/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>';
     }
+    // noinspection JSUnresolvedVariable
     if (document.evaluate('//*[@id="goodsNoDiscount"]/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML != null) {
         document.evaluate('//*[@id="goodsNoDiscount"]/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td>';
     }
 
 }
 
+// noinspection JSUnusedGlobalSymbols
 function mCheckedOnSubtotalPage() {
     document.getElementById('submissionCheck').checked = true;
 }
@@ -517,6 +543,7 @@ function mCheckedOnSubtotalPage() {
 function mOrderConfirmationPage() {
     let header = '<h1>Замовлення було успішно відправлено</h1>';
     let header2 = '<h2>Деталі замовлення:</h2>';
+    // noinspection JSUnresolvedVariable
     let mText = document.evaluate('/html/body/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[1]/td/table/tbody/tr/td/div/div/form/table/tbody/tr[2]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[1]/td[1]/table', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.outerHTML;
     mText = mText.replace('width="375"', 'width="100%"');
     let mGoToHomepage = '<div class="mMiddle"><button class="mMiddleButton" type="button" onclick="window.location.href=\'PlaceAnOrder.page\'">На головну</button></div>';
@@ -528,13 +555,15 @@ function mOrderConfirmationPage() {
 }
 
 function mGoFromPlaceAnOrder() {
+    // noinspection JSUnresolvedVariable
     let mCampainNumber = AvonAnalyticsObjex.Profile.campaignInfo.replace(':C', '/');
+    // noinspection JSUnresolvedFunction
     submitFormPao(mCampainNumber);
 }
 
 function mHelpOverlay(mTextForHelp) {
-    mClose = '<input type="button" value=" X " id="mCloseButton" onClick="mHideHelpOverlay()">';
-    mHelpContent = '<div id="mHelpContent">' + mTextForHelp + '</div>';
+    let mClose = '<input type="button" value=" X " id="mCloseButton" onClick="mHideHelpOverlay()">';
+    let mHelpContent = '<div id="mHelpContent">' + mTextForHelp + '</div>';
     // create div for page
     let div = document.createElement('div');
     div.id = "mHelpOverlay";
