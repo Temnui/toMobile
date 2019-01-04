@@ -312,7 +312,7 @@ function mStart() {
     let tag_css = document.createElement('link');
     tag_css.rel = 'stylesheet';
     if (/qaf/.test(window.location.host)) {
-        tag_css.href = 'https://raw.githubusercontent.com/Temnui/toMobile/master/forMobile.css'; // test css source
+        tag_css.href = 'https://cdn.jsdelivr.net/gh/Temnui/toMobile/forMobile.css'; // test css source
     } else {
         tag_css.href = 'http://www.avon.com.ua/REPSuite/static/css/forMobile.css'; // css source
         }
