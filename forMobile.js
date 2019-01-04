@@ -36,9 +36,8 @@ $(document).ready(function() {
     // mobile mCheck
     // uncomment next lie on prod now we check only for repAcctNumber
     // noinspection JSUnresolvedVariable
-    let repAcctNumber = AvonAnalyticsObjex.Profile.repAcct;
     let checkAcctNumber = false;
-    if (repAcctNumber === '22444856' || repAcctNumber === '29838218' || repAcctNumber === '17841221' || repAcctNumber === '8610786' || repAcctNumber === '26227353') {
+    if (/qaf/.test(window.location.hostname)) {
         checkAcctNumber = true;
     }
     if (isMobile.any() && (/loginMain/.test(window.location.pathname)) && (/qaf/.test(window.location.hostname))) {
