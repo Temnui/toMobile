@@ -140,7 +140,7 @@ function mCreateBody() {
     //var mSelCampain = '<select id="mSelCampain"><option selected value="' + mCampainNumber + '">' + mCampainNumber.replace('2018', '') + '</option></select>';
     let mInputs = '<input id="mLinenumber" tabindex="1" value="" type="number" size="6" maxlength="5" defaultvalue=""><input id="mQuantity" tabindex="2" value="1" type="text" size="3" maxlength="3" defaultvalue="1">';
     let mButtonAdd = '<button type="button" onclick=\'mAddToOrder();\'>Додати</button>';
-    for (i = 0; mQuantityOfProducts >= i; i++) {
+    for (let i = 0; mQuantityOfProducts >= i; i++) {
         if (document.getElementById('newItems[' + i + '].quantity').value !== 0) {
             let tempQuantity = document.getElementById('newItems[' + i + '].quantity').value;
             mDescription = 'Кількість: ' + tempQuantity + ' ' + document.getElementById('newItems[' + i + '].description.display').innerHTML + '<br>' + mDescription;
