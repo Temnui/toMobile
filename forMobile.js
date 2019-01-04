@@ -108,7 +108,6 @@ function mAddToOrder() {
 }
 
 //add prototype to string for ability replace all in string
-
 function replaceAll(str, searchStr, replaceStr) {
     // escape regexp special characters in search string
     searchStr = searchStr.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -313,8 +312,11 @@ function mStart() {
     // import css
     let tag_css = document.createElement('link');
     tag_css.rel = 'stylesheet';
-    tag_css.href = 'http://temnui.com/avontest/forMobile.css'; // css source
-    //tag_css.href = 'http://www.avon.com.ua/REPSuite/static/css/forMobile.css'; // css source
+    if (/qaf/.test(window.location.host)) {
+        tag_css.href = 'https://raw.githubusercontent.com/Temnui/toMobile/master/forMobile.css'; // test css source
+    } else {
+        tag_css.href = 'http://www.avon.com.ua/REPSuite/static/css/forMobile.css'; // css source
+        }
     tag_css.type = 'text/css';
     let tag_head = document.getElementsByTagName('head');
     tag_head[0].appendChild(tag_css);
