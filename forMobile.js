@@ -1,3 +1,4 @@
+// todo: check popup on 4-th step
 let mQuantityOfProducts = 0; // don`t forget add feature save current state of basket
 let mCampainNumber = '';
 let mDescription = '';
@@ -312,7 +313,7 @@ function mStart() {
     let tag_css = document.createElement('link');
     tag_css.rel = 'stylesheet';
     if (/qaf/.test(window.location.host)) {
-        tag_css.href = 'https://cdn.jsdelivr.net/gh/Temnui/toMobile/forMobile.css'; // test css source
+        tag_css.href = 'http://temnui.com/avontest/forMobile.css'; // test css source
     } else {
         tag_css.href = 'http://www.avon.com.ua/REPSuite/static/css/forMobile.css'; // css source
         }
@@ -381,6 +382,7 @@ function mDeliveryPage() {
     let mBtnContinue = '<br><div class="mMiddle"><button type="button" onclick="SubmitPagePort(\'orderSummary.page\',99,99,\'No\',\'true\',\'true\');"> Продовжити </button></div>';
     //mDeliveryAddrRadio = mDeliveryAddrRadio.replace('deliveryType', 'mDeliveryType');
     //mDeliveryAddrRadio = mDeliveryAddrRadio.replace(/deliveryTypeSelected/g, 'mdeliveryTypeSelected');
+    let mDetails;
     if (document.getElementsByClassName('padding_port_address_body1')[1] === undefined) {
         mDetails = document.getElementsByClassName('padding_port_address_body1')[0];
         mDetails = mDetails.outerHTML;
@@ -395,7 +397,7 @@ function mDeliveryPage() {
     mPayment = mPayment.replace('height="100%"', '');
     mPayment = mPayment.replace('javascript:OpenLearnMorePM', 'mReadMorePM');
     let mContent = mDeliveryAddr + mDeliveryAddrRadio + '<br><div id="mDetails">' + mDetails + '</div>' + mPayment + mBtnContinue; // add mRecipient after mPayment
-    div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = "mDeliveryContent";
     div.innerHTML = mContent;
     document.body.appendChild(div);
@@ -410,7 +412,7 @@ function mDeliveryPage() {
     //create popup with payment method details
     let mReadMorePM = document.getElementsByClassName('LearnMorePM_txt')[0].outerHTML;
     let mReadMorePMClose = '<span id="backArrow" onclick="mReadMorePM()"><<</span>';
-    let div = document.createElement('div');
+    div = document.createElement('div');
     div.id = "mReadMorePM";
     div.innerHTML = mReadMorePMClose + mReadMorePM + mReadMorePMClose;
     document.body.appendChild(div);
