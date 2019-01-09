@@ -1,4 +1,5 @@
 // todo: check popup on 4-th step
+// todo paiSubstitute.page make mobile version
 let mQuantityOfProducts = 0; // don`t forget add feature save current state of basket
 let mCampainNumber = '';
 let mDescription = '';
@@ -337,11 +338,13 @@ function mStart() {
         mSubTotalPage();
     } else if (/orderConfirmation.page/.test(window.location.pathname)) {
         mOrderConfirmationPage();
+    } else if (/paiSubstitute.page/.test(window.location.pathname)) {
+        document.getElementsByTagName('body')[0].children[4].style.display = 'block';
     }
     //create back to desktop view button
-    let mUnmobileButton = '<div class="mMiddle"><input id="mGoToDesktop" type="submit" value="Повна версія сайту" onclick="mUnmobile()"></div>';
+    let mUnmobileButton = '<div class="mMiddle"><input id="mGoToDesktop" type="submit" value="Повна версія сайту" onclick="mUnmobile()"></div>'; //todo make mobile version
     let div = document.createElement('div');
-    div.id = "mOrderConfirmationPage";
+    div.id = "mUnmobileButton";
     div.innerHTML = mUnmobileButton;
     document.body.appendChild(div);
 }
@@ -368,8 +371,6 @@ function mSkipSim() {
     });
     return value;
 }*/
-
-let mDetails = '';
 
 function mDeliveryPage() {
     let mDeliveryAddr = '<div id="mDeliveryAddr">Оберіть тип доставки <div onclick="mDeliveryMore();">Детальніше</div></div>';
@@ -504,14 +505,14 @@ function mSubTotalPage() {
     tempVar = tempVar.replace(/style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 12px; line-height: 1.1640625; font-weight: bold;"/g, "class=\"totalSummAll\"");
     document.getElementById('headerGomac').innerHTML = tempVar;
     let totalSummAll = document.getElementsByClassName('totalSummAll');
-    let summWithDiscount = totalSummAll[0].innerHTML;
-    summWithDiscount = summWithDiscount + ' ' + totalSummAll[1].innerHTML + '<br>';
-    let discount = totalSummAll[2].innerHTML;
-    discount = discount + ' ' + totalSummAll[3].innerHTML + '<br>';
-    let totalSumm = totalSummAll[4].innerHTML;
-    totalSumm = totalSumm + ' ' + totalSummAll[5].innerHTML + '<br>';
-    let aditionalService = totalSummAll[6].innerHTML;
-    aditionalService = aditionalService + ' ' + totalSummAll[7].innerHTML + '<br>';
+    let summWithDiscount = totalSummAll[0].innerText;
+    summWithDiscount = summWithDiscount + ' ' + totalSummAll[1].innerText + '<br>';
+    let discount = totalSummAll[2].innerText;
+    discount = discount + ' ' + totalSummAll[3].innerText + '<br>';
+    let totalSumm = totalSummAll[4].innerText;
+    totalSumm = totalSumm + ' ' + totalSummAll[5].innerText + '<br>';
+    let aditionalService = totalSummAll[6].innerText;
+    aditionalService = aditionalService + ' ' + totalSummAll[7].innerText + '<br>';
     let terms = '<p>ВАЖЛИВО! Натискаючи кнопку «Відправити замовлення у Avon» Ви погоджуєтеся з наступним: Ви надаєте ДП «Ейвон Косметікс Юкрейн» згоду на обробку персональних даних на умовах, визначених згодою на обробку персональних даних , яка розміщена тут Ви належним чином повідомлені про включення Ваших персональних даних до бази персональних даних ДП «Ейвон Косметікс Юкрейн», про мету отримання та обробки своїх персональних даних та їх передачу третім особам Ви ознайомлені зі своїми правами як суб’єкта персональних даних та</span></p>';
     //checkbox
     let checkBox = document.getElementById('submissionCheck').outerHTML;
@@ -526,13 +527,14 @@ function mSubTotalPage() {
     div.innerHTML = replaceAll(div.innerHTML, 'style="font-family: \'DejaVu Sans\', Arial, Helvetica, sans-serif; color: #000000; font-size: 11px; line-height: 1.1635742;"', 'class = "mMyTable"');
     div.innerHTML = replaceAll(div.innerHTML, 'style="font-family: \'DejaVu Sans\', Arial, Helvetica, sans-serif; color: #000000; font-size: 11px; line-height: 1.1635742; font-weight: bold;"', 'class = "mMyTableHeader"');
     div.innerHTML = replaceAll(div.innerHTML, 'Кількість', 'N');
+    console.log(div);
     document.body.appendChild(div);
     // noinspection JSUnresolvedVariable
-    if (document.evaluate('//*[@id="mAllGoods"]/table/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML != null) {
+    if (document.evaluate('//*[@id="mAllGoods"]/table/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null) {
         document.evaluate('//*[@id="mAllGoods"]/table/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>';
     }
     // noinspection JSUnresolvedVariable
-    if (document.evaluate('//*[@id="goodsNoDiscount"]/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML != null) {
+    if (document.evaluate('//*[@id="goodsNoDiscount"]/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null) {
         document.evaluate('//*[@id="goodsNoDiscount"]/tbody/tr[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td>';
     }
 
